@@ -5,8 +5,22 @@
   <title>Water Hero</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="ocean-bg">
+    <div id="title-modal" class="modal">
+  <div class="modal-content">
+    <h2>Welcome to Water Match!</h2>
+    <p>Win on-campus prizes by matching the water facts with their proper names.</p>
+    <p>Select your difficulty to begin:</p>
+    <select id="difficulty-select">
+      <option value="normal">Normal (12 cards)</option>
+      <option value="easy">Easy (10 cards)</option>
+      <option value="hard">Hard (16 cards)</option>
+    </select>
+    <button id="start-game-btn">Start Game</button>
+  </div>
+</div>
     <div class="top-bar">
       <div class="hamburger-menu">
         <button id="hamburger-btn" aria-label="Menu">
@@ -22,7 +36,9 @@
         </div>
       </div>
       
+    <a href="https://www.charitywater.org/" target="_blank" rel="noopener">
       <img src="cwaterlogo.png" alt="charity: water" class="cw-logo topbar-logo">
+    </a>
       
         <div id="menu-dropdown" class="menu-dropdown hidden">
           <ul>

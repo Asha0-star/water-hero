@@ -263,6 +263,51 @@ let points = 0;
 let lockBoard = false;
 let currentReward = null; // Track the reward for this win
 
+// ...existing code...
+const titleModal = document.getElementById('title-modal');
+const startGameBtn = document.getElementById('start-game-btn');
+const difficultySelect = document.getElementById('difficulty-select');
+
+let difficulty = 'normal'; // default
+
+startGameBtn.onclick = function() {
+  difficulty = difficultySelect.value;
+  titleModal.classList.add('hidden');
+  startNewGameWithDifficulty();
+};
+
+function startNewGameWithDifficulty() {
+  let pairCount = 6; // normal
+  if (difficulty === 'easy') pairCount = 5;
+  if (difficulty === 'hard') pairCount = 8;
+  setupGameWithPairs(pairCount);
+  renderGrid();
+  updateProgressBar();
+  // Adjust grid class for layout
+  grid.classList.remove('easy', 'hard');
+  if (difficulty === 'easy') grid.classList.add('easy');
+  if (difficulty === 'hard') grid.classList.add('hard');
+  // No need to modify cardPairs for hard mode here.
+}
+
+function setupGameWithPairs(pairCount) {
+  const selected = pickRandomPairs(pairCount);
+  cards = [];
+  for (let i = 0; i < selected.length; i += 2) {
+    cards.push(
+      { id: i, pair: i, ...selected[i] },
+      { id: i + 1, pair: i, ...selected[i + 1] }
+    );
+  }
+  shuffle(cards);
+}
+// ...existing code...
+
+// Replace initial setup with modal show
+window.onload = function() {
+  titleModal.classList.remove('hidden');
+};
+
 // --- Card Creation ---
 function createCard(card, idx) {
   const cardDiv = document.createElement('div');
@@ -270,13 +315,16 @@ function createCard(card, idx) {
   cardDiv.dataset.pair = card.pair;
   cardDiv.dataset.idx = idx;
 
+  // Only show front image if not hard mode
+  const showFrontImg = difficulty !== 'hard';
+
   cardDiv.innerHTML = `
     <div class="card-inner">
       <div class="card-back">
         <img src="Screenshot_27-6-2025_171657_www.bing.com.jpeg" alt="charity: water logo">
       </div>
       <div class="card-front">
-        <img src="${card.img}" alt="" style="width:32px;display:block;margin:0 auto 8px;">
+        ${showFrontImg ? `<img src="${card.img}" alt="" style="width:32px;display:block;margin:0 auto 8px;">` : ''}
         <span>${card.label}</span>
       </div>
     </div>
@@ -301,7 +349,7 @@ function resetGame() {
   renderGrid();
 }
 
-
+document.getElementById('menu-quit').addEventListener('click', newGameWithDifficulty ());
 
 // --- Card Flip Logic ---
 function onCardClick(cardDiv) {
@@ -401,7 +449,15 @@ function showConfetti() {
 // --- Progress Bar & Win Logic ---
 function onGameWin() {
   showConfetti(); // Show confetti before anything else
-  points += 50;
+  if (difficulty === 'hard') {
+    points += 70;
+  }
+  if (difficulty === 'easy') {
+    points += 30;
+  }
+  if (difficulty === 'normal') {
+    points += 50;
+  }
   updateProgressBar();
   if (points >= 100) {
     animateGift && animateGift(); // If animateGift exists

@@ -2,8 +2,8 @@
 body, html {
   height: 100%;
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: url(Ocean.webp) no-repeat center;
+  font-family: 'Proxima Nova', Arial, sans-serif;
+  background: url(sea.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -24,12 +24,13 @@ header {
   align-items: center;
   justify-content: center;
   color: #333;
+  font-family: 'Proxima Nova', Arial, sans-serif;
   text-align: center;
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 300;
   margin: 0;
   letter-spacing: 1px;
-  padding: 0;
+  padding: 24px 0;
   background: transparent;
   z-index: 1;
   position: relative;
@@ -38,7 +39,7 @@ header {
 header h1 {
   margin: 24px 0 0 0;
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 300;
   letter-spacing: 1.5px;
   color: #222;
 }
@@ -57,7 +58,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 36px;
   padding: 0 32px 16px 32px;
   z-index: 2;
   position: relative;
@@ -119,12 +120,20 @@ header h1 {
   display: grid;
   grid-template-columns: repeat(4, 100px);
   grid-template-rows: repeat(3, 140px);
-  gap: 40px;
+  gap: 50px;
   justify-content: center;
   margin: 0 auto;
   max-width: 500px;
   z-index: 2;
   position: relative;
+}
+
+/* Easy mode grid */
+.card-grid.easy {
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(2, 140px);
+  gap: 40px;
+  max-width: 600px;
 }
 
 /* Card Styles */
@@ -327,6 +336,30 @@ header h1 {
 
 .menu-dropdown button:hover {
   background: #ffe082;
+}
+
+/* Difficulty Selector */
+.difficulty-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+#difficulty-select {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #fff;
+  color: #222;
+}
+
+#title-modal {
+  z-index: 100;
+}
+#title-modal .modal-content {
+  min-width: 320px;
 }
 
 /* Responsive */
