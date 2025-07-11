@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Water Hero</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ocean-bg">
+    <div class="top-bar">
+      <div class="hamburger-menu">
+        <button id="hamburger-btn" aria-label="Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+      <div class="progress-container">
+        <label for="progress-bar">Progress</label>
+        <div class="progress-bar-bg">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </div>
+      
+      <img src="cwaterlogo.png" alt="charity: water" class="cw-logo topbar-logo">
+      
+        <div id="menu-dropdown" class="menu-dropdown hidden">
+          <ul>
+            <li><button id="menu-rewards">My rewards</button></li>
+            <li><button id="menu-newgame">New game</button></li>
+            <li><button id="menu-quit">Quit</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <h1>water match</h1>
+    </header>
+    <main>
+      <div class="card-grid">
+        <!-- 12 cards, JS will fill content -->
+      </div>
+    </main>
+    <div id="prize-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Congratulations!</h2>
+        <p>Your knowledge earned you ${currentReward.label}!</p>
+        <button id="close-modal">Close</button>
+      </div>
+    </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
