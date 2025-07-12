@@ -170,7 +170,7 @@ header h1 {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: box-shadow 0.2s;
 }
@@ -183,8 +183,10 @@ header h1 {
 }
 
 .card-back img {
-  width: 40px;
-  margin-bottom: 8px;
+  width: 75px;
+  height: 105px;
+ 
+  border-radius: 12px;
 }
 
 .card-front {
@@ -388,4 +390,4 @@ header h1 {
     font-size: 1.3rem;
     margin-top: 14px;
   }
-}
+    }

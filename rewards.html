@@ -94,7 +94,7 @@
     const rewards = JSON.parse(localStorage.getItem('water_rewards') || '[]');
     const rewardsList = document.getElementById('rewards-list');
     const noRewards = document.getElementById('no-rewards');
-
+  
     if (rewards.length === 0) {
       noRewards.style.display = '';
     } else {

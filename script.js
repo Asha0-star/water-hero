@@ -349,7 +349,13 @@ function resetGame() {
   renderGrid();
 }
 
-document.getElementById('menu-quit').addEventListener('click', newGameWithDifficulty ());
+document.getElementById('menu-quit').addEventListener('click', () => {
+  // Show welcome modal and reset game
+  titleModal.classList.remove('hidden');
+  points = 0;
+  updateProgressBar();
+  resetGame();
+});
 
 // --- Card Flip Logic ---
 function onCardClick(cardDiv) {
@@ -456,23 +462,15 @@ function onGameWin() {
     points += 30;
   }
   if (difficulty === 'normal') {
-    points += 50;
+    points += 100;
   }
   updateProgressBar();
+
+  // Always show a prize modal when progress bar is full
   if (points >= 100) {
     animateGift && animateGift(); // If animateGift exists
-    // Pick a random reward not already won
-    let rewards = [];
-    try {
-      rewards = JSON.parse(localStorage.getItem('water_rewards') || '[]');
-    } catch {}
-    const wonLabels = rewards.map(r => r.label);
-    const available = possibleRewards.filter(r => !wonLabels.includes(r.label));
-    if (available.length > 0) {
-      currentReward = available[Math.floor(Math.random() * available.length)];
-    } else {
-      currentReward = null;
-    }
+    // Pick a random reward (no limit on repeats)
+    currentReward = possibleRewards[Math.floor(Math.random() * possibleRewards.length)];
     // Show the modal immediately when a reward is earned
     showModal(currentReward);
     // Do NOT reset game immediately after showing modal; wait for modal close
@@ -492,41 +490,36 @@ function updateProgressBar() {
 
 // --- Modal Logic ---
 function showModal(reward) {
-  if (reward) {
-    modalContent.innerHTML = `
-      <h2>Congratulations!</h2>
-      <p>Your knowledge earned you ${reward.label}!</p>
-      <div style="margin:18px 0;">
-        <img src="${reward.img}" alt="" style="width:64px;height:64px;border-radius:12px;box-shadow:0 2px 8px #ffd60055;">
-        <div style="font-size:1.2rem;font-weight:600;margin-top:8px;">${reward.label}</div>
-        <div style="font-size:1rem;color:#555;margin-top:4px;">${reward.desc}</div>
-      </div>
-      <button id="close-modal">Claim Prize</button>
-    `;
-  } else {
-    modalContent.innerHTML = `
-      <h2>Congratulations!</h2>
-      <p>You earned a prize for your support!</p>
-      <button id="close-modal">Close</button>
-    `;
+  // Always ensure reward is valid
+  if (!reward) {
+    // Pick a random reward if none is set
+    reward = possibleRewards[Math.floor(Math.random() * possibleRewards.length)];
+    currentReward = reward;
   }
+  modalContent.innerHTML = `
+    <h2>Congratulations!</h2>
+    <p>Your knowledge earned you ${reward.label}!</p>
+    <div style="margin:18px 0;">
+      <img src="${reward.img}" alt="" style="width:64px;height:64px;border-radius:12px;box-shadow:0 2px 8px #ffd60055;">
+      <div style="font-size:1.2rem;font-weight:600;margin-top:8px;">${reward.label}</div>
+      <div style="font-size:1rem;color:#555;margin-top:4px;">${reward.desc}</div>
+    </div>
+    <button id="close-modal">Claim Prize</button>
+  `;
   modal.classList.remove('hidden');
-  // Remove any previous event listeners by replacing the button
   document.getElementById('close-modal').onclick = handleModalClose;
 }
 
 function handleModalClose() {
   modal.classList.add('hidden');
-  // Save reward if any
+  // Save reward if any (allow duplicates)
   if (currentReward) {
     let rewards = [];
     try {
       rewards = JSON.parse(localStorage.getItem('water_rewards') || '[]');
     } catch {}
-    if (!rewards.some(r => r.label === currentReward.label)) {
-      rewards.push(currentReward);
-      localStorage.setItem('water_rewards', JSON.stringify(rewards));
-    }
+    rewards.push(currentReward);
+    localStorage.setItem('water_rewards', JSON.stringify(rewards));
     currentReward = null;
   }
   // Reset points and progress bar
@@ -542,7 +535,16 @@ function handleModalClose() {
 const menuDropdown = document.getElementById('menu-dropdown');
 const hamburgerBtn = document.getElementById('hamburger-btn');
 hamburgerBtn.addEventListener('click', () => {
-    return menuDropdown.classList.toggle('hidden');
+  menuDropdown.classList.toggle('hidden');
+});
+
+// Remove broken/duplicate event listener for "Quit"
+document.getElementById('menu-quit').addEventListener('click', () => {
+  // Show welcome modal and reset game
+  titleModal.classList.remove('hidden');
+  points = 0;
+  updateProgressBar();
+  resetGame();
 });
 
 
