@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background: url(Ocean.webp) no-repeat center;
+      background: url(water.jpg) no-repeat center;
       background-size: cover;
       min-height: 100vh;
     }
@@ -89,6 +89,7 @@
     </div>
     <button class="back-btn" onclick="window.location.href='index.html'">← Back to Game</button>
   </div>
+  <script src="script.js"></script>
   <script>
     // Load rewards from localStorage
     const rewards = JSON.parse(localStorage.getItem('water_rewards') || '[]');
@@ -102,10 +103,10 @@
         const li = document.createElement('li');
         li.className = 'reward-item';
         li.innerHTML = `
-          <img src="${reward.img}" alt="">
+          <img src="${r.img}" alt="">
           <div>
-            <div><b>${reward.label}</b></div>
-            <div style="font-size:0.98rem;color:#555;">${reward.desc}</div>
+            <div><b>${r.label}</b></div>
+            <div style="font-size:0.98rem;color:#555;">${r.desc}</div>
           </div>
         `;
         rewardsList.appendChild(li);

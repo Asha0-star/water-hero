@@ -65,12 +65,12 @@ const cardPairs = [
   },
   // 8
   {
-    label: "Chlorine",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913475.png"
+    label: "Why Water?",
+    img: "🤔"
   },
   {
-    label: "Used to disinfect water; too much can be harmful.",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913475.png"
+    label: "Water access improves health, education, self empowerment, and opportunity.",
+    img: "🤔"
   },
   // 9
   {
@@ -101,12 +101,12 @@ const cardPairs = [
   },
   // 12
   {
-    label: "Copper",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913479.png"
+    label: "The Spring",
+    img: "⛲"
   },
   {
-    label: "Corroded pipes can release copper into water.",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913479.png"
+    label: "Charity: water's community of donors. Their support fills funding gaps in new local projects.",
+    img: "⛲"
   },
   // 13
   {
@@ -146,21 +146,21 @@ const cardPairs = [
   },
   // 17
   {
-    label: "Radon",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913484.png"
+    label: "703,000,000",
+    img: "🚰"
   },
   {
-    label: "A radioactive gas that can dissolve into groundwater.",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913484.png"
+    label: "Population lacking access to clean and safe drinking water.",
+    img: "🚰"
   },
   // 18
   {
-    label: "Atrazine",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913485.png"
+    label: "The 100% Model",
+    img: "🤝"
   },
   {
-    label: "A common weed killer; disrupts aquatic ecosystems.",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913485.png"
+    label: "The charity: water promise. 100% of donations go directly to water projects, no matter the size or payment method.",
+    img: "🤝"
   },
   // 19
   {
@@ -173,12 +173,12 @@ const cardPairs = [
   },
   // 20
   {
-    label: "Salt",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913487.png"
+    label: "Methods of Giving",
+    img: "🌍"
   },
   {
-    label: "Road salt runoff can harm freshwater organisms.",
-    img: "https://cdn-icons-png.flaticon.com/512/2913/2913487.png"
+    label: "Individual donations, creative self-led fundraisers, and even community sponsorships with CW can make a difference",
+    img: "🌍"
   }
 ];
 
@@ -321,7 +321,7 @@ function createCard(card, idx) {
   cardDiv.innerHTML = `
     <div class="card-inner">
       <div class="card-back">
-        <img src="Screenshot_27-6-2025_171657_www.bing.com.jpeg" alt="charity: water logo">
+        <img src="Screenshot_12-7-2025_185433_d11sa1anfvm2xk.cloudfront.net.jpeg" alt="charity: water logo">
       </div>
       <div class="card-front">
         ${showFrontImg ? `<img src="${card.img}" alt="" style="width:32px;display:block;margin:0 auto 8px;">` : ''}
@@ -529,6 +529,20 @@ function handleModalClose() {
     giftIcon.classList.remove('glow');
   }
   resetGame();
+}
+
+document.getElementById('close-modal').addEventListener('click', registerPrize);
+
+function registerPrize() {
+  currentReward.forEach(reward => {
+    // Save each reward to localStorage
+    let rewards = [];
+    try {
+      rewards = JSON.parse(localStorage.getItem('water_rewards') || '[]');
+    } catch {}
+    rewards.push(reward);
+    localStorage.setItem('water_rewards', JSON.stringify(rewards));
+  });
 }
 
 // --- Menu and Initial Setup ---

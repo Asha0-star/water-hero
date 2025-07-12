@@ -3,7 +3,7 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: 'Proxima Nova', Arial, sans-serif;
-  background: url(sea.jpg) no-repeat center;
+  background: url(water.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -37,9 +37,9 @@ header {
 }
 
 header h1 {
-  margin: 24px 0 0 0;
+  margin: 24px 0 24px 0;
   font-size: 2.2rem;
-  font-weight: 300;
+  font-weight: 550;
   letter-spacing: 1.5px;
   color: #222;
 }
@@ -136,6 +136,16 @@ header h1 {
   max-width: 600px;
 }
 
+.card-grid.hard-wide {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 16 cards: 6 columns x 3 rows fits 18 cards */
+  grid-auto-rows: minmax(120px, auto);
+  gap: 40px;
+  justify-items: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
 /* Card Styles */
 .card {
   perspective: 800px;
@@ -193,6 +203,7 @@ header h1 {
   background: #ffffff;
   border-color:#ffc907;
   color: #222;
+  font: 0.9rem 'Proxima Nova', Arial, sans-serif;
   transform: rotateY(180deg);
   border: 2px solid #222;
   padding: 12px;
