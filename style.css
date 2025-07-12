@@ -30,14 +30,14 @@ header {
   font-weight: 300;
   margin: 0;
   letter-spacing: 1px;
-  padding: 24px 0;
+  padding: 16px 0;
   background: transparent;
   z-index: 1;
   position: relative;
 }
 
 header h1 {
-  margin: 24px 0 24px 0;
+  margin: 12px 0 12px 0;
   font-size: 2.2rem;
   font-weight: 550;
   letter-spacing: 1.5px;
@@ -59,7 +59,7 @@ header h1 {
   align-items: center;
   justify-content: center;
   gap: 36px;
-  padding: 0 32px 16px 32px;
+  padding: 0 32px 8px 32px;
   z-index: 2;
   position: relative;
   background: transparent;
@@ -310,8 +310,8 @@ header h1 {
 
 .menu-dropdown {
   position: absolute;
-  top: 38px;
-  right: 0;
+  left: 0;
+  top: 100%;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.13);
